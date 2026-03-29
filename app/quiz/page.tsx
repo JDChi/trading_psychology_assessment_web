@@ -48,12 +48,12 @@ export default function QuizPage() {
 
   if (showResult && result) {
     return (
-      <div className="flex min-h-screen flex-col items-center bg-gradient-to-b from-zinc-50 to-zinc-100 px-6 py-12">
+      <div className="flex min-h-screen flex-col items-center bg-gradient-to-b from-zinc-50 to-zinc-100 px-4 py-8 sm:px-6 sm:py-12">
         <main className="w-full max-w-xl">
-          <h1 className="mb-2 text-center text-3xl font-bold tracking-tight text-zinc-900">
+          <h1 className="mb-2 text-center text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
             测评结果
           </h1>
-          <p className="mb-8 text-center text-lg text-zinc-600">
+          <p className="mb-8 text-center text-base sm:text-lg text-zinc-600">
             你的交易心理特征
           </p>
 
@@ -73,7 +73,7 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-gradient-to-b from-zinc-50 to-zinc-100 px-6 py-12">
+    <div className="flex min-h-screen flex-col items-center bg-gradient-to-b from-zinc-50 to-zinc-100 px-4 py-8 sm:px-6 sm:py-12">
       <main className="w-full max-w-xl">
         <div className="mb-8">
           <div className="mb-2 flex items-center justify-between text-sm text-zinc-500">
@@ -96,11 +96,11 @@ export default function QuizPage() {
           onSelect={handleSelect}
         />
 
-        <div className="mt-8 flex justify-between gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row justify-between gap-3">
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
-            className="rounded-full border border-zinc-300 bg-white px-6 py-3 font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50"
+            className="order-2 sm:order-1 rounded-full border border-zinc-300 bg-white px-6 py-3.5 font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             上一题
           </button>
@@ -109,7 +109,7 @@ export default function QuizPage() {
             <button
               onClick={handleSubmit}
               disabled={!currentAnswer}
-              className="rounded-full bg-zinc-900 px-8 py-3 font-medium text-white transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="order-1 sm:order-2 rounded-full bg-zinc-900 px-8 py-3.5 font-medium text-white transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
             >
               查看结果
             </button>
@@ -117,7 +117,7 @@ export default function QuizPage() {
             <button
               onClick={handleNext}
               disabled={!currentAnswer}
-              className="rounded-full bg-zinc-900 px-8 py-3 font-medium text-white transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="order-1 sm:order-2 rounded-full bg-zinc-900 px-8 py-3.5 font-medium text-white transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
             >
               下一题
             </button>
