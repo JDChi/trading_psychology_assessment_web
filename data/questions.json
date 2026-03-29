@@ -1,0 +1,12 @@
+{
+  "title": "股票交易心理测评",
+  "description": "了解你的交易心理特征",
+  "dimensions": [
+    {
+      "id": "risk",
+      "name": "风险偏好",
+      "description": "你愿意承受多大风险"
+    }
+  ],
+  "questions": []
+}
