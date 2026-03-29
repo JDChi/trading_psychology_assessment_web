@@ -30,10 +30,10 @@ export default function QuestionCard({
           <button
             key={option.value}
             onClick={() => onSelect(option.value)}
-            className={`rounded-lg border px-4 py-3 text-left transition-colors ${
+            className={`rounded-lg border px-4 py-3 text-left text-base transition-colors ${
               selectedValue === option.value
                 ? "border-zinc-900 bg-zinc-900 text-white"
-                : "border-zinc-200 hover:border-zinc-400 hover:bg-zinc-50"
+                : "border-zinc-200 text-zinc-900 hover:border-zinc-400 hover:bg-zinc-50"
             }`}
           >
             {option.label}
