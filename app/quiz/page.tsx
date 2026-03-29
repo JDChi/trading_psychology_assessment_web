@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getQuestions, calculateResults, type Answer, type QuizResult } from "@/lib/quiz";
 import QuestionCard from "@/components/quiz/QuestionCard";
 import ResultCard from "@/components/quiz/ResultCard";
@@ -53,24 +53,24 @@ export default function QuizPage() {
 
   if (isCalculating) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-zinc-50 to-zinc-100 px-4 py-8 sm:px-6 sm:py-12">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 px-4 py-8 sm:px-6 sm:py-12">
         <main className="w-full max-w-xl text-center">
-          <div className="mb-8">
-            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-zinc-200 border-t-zinc-900" />
-            <h2 className="text-xl font-medium text-zinc-900">正在分析你的交易心理...</h2>
-            <p className="mt-2 text-sm text-zinc-500">这可能需要几秒钟</p>
+          <div className="mb-10">
+            <div className="mx-auto mb-5 h-14 w-14 animate-spin rounded-full border-4 border-slate-200 border-t-slate-700" />
+            <h2 className="text-xl font-semibold text-slate-800">正在分析你的交易心理...</h2>
+            <p className="mt-2 text-sm text-slate-500">这可能需要几秒钟</p>
           </div>
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-sm text-zinc-600">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-zinc-400" />
+          <div className="space-y-3">
+            <div className="flex items-center justify-center gap-2 text-sm text-slate-600">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-slate-400" />
               分析答题模式
             </div>
-            <div className="flex items-center gap-2 text-sm text-zinc-600">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-zinc-400 [animation-delay:200ms]" />
+            <div className="flex items-center justify-center gap-2 text-sm text-slate-600">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-slate-400 [animation-delay:200ms]" />
               评估认知偏差
             </div>
-            <div className="flex items-center gap-2 text-sm text-zinc-600">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-zinc-400 [animation-delay:400ms]" />
+            <div className="flex items-center justify-center gap-2 text-sm text-slate-600">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-slate-400 [animation-delay:400ms]" />
               生成个性化报告
             </div>
           </div>
@@ -81,21 +81,23 @@ export default function QuizPage() {
 
   if (showResult && result) {
     return (
-      <div className="flex min-h-screen flex-col items-center bg-gradient-to-b from-zinc-50 to-zinc-100 px-4 py-8 sm:px-6 sm:py-12">
+      <div className="flex min-h-screen flex-col items-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 px-4 py-8 sm:px-6 sm:py-12">
         <main className="w-full max-w-xl">
-          <h1 className="mb-2 text-center text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
-            测评结果
-          </h1>
-          <p className="mb-8 text-center text-base sm:text-lg text-zinc-600">
-            你的交易心理特征
-          </p>
+          <div className="mb-8 text-center">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-800 sm:text-3xl">
+              测评结果
+            </h1>
+            <p className="mt-2 text-base text-slate-600">
+              你的交易心理画像
+            </p>
+          </div>
 
           <ResultCard result={result} />
 
           <div className="mt-8 text-center">
             <button
               onClick={handleRestart}
-              className="rounded-full border border-zinc-300 bg-white px-6 py-3 font-medium text-zinc-700 transition-colors hover:bg-zinc-50"
+              className="rounded-full border-2 border-slate-300 bg-white px-8 py-3 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50"
             >
               重新测评
             </button>
@@ -106,18 +108,19 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-gradient-to-b from-zinc-50 to-zinc-100 px-4 py-8 sm:px-6 sm:py-12">
+    <div className="flex min-h-screen flex-col items-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 px-4 py-8 sm:px-6 sm:py-12">
       <main className="w-full max-w-xl">
+        {/* 进度区域 */}
         <div className="mb-8">
-          <div className="mb-2 flex items-center justify-between text-sm text-zinc-500">
-            <span>
+          <div className="mb-3 flex items-center justify-between text-sm">
+            <span className="font-medium text-slate-600">
               第 {currentIndex + 1} / {questions.length} 题
             </span>
-            <span>{Math.round(progress)}%</span>
+            <span className="font-medium text-slate-700">{Math.round(progress)}%</span>
           </div>
-          <div className="h-2 w-full rounded-full bg-zinc-200">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
             <div
-              className="h-2 rounded-full bg-zinc-900 transition-all duration-300"
+              className="h-full rounded-full bg-slate-700 transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -133,7 +136,7 @@ export default function QuizPage() {
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
-            className="order-2 sm:order-1 rounded-full border border-zinc-300 bg-white px-6 py-3.5 font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50"
+            className="order-2 sm:order-1 rounded-xl border-2 border-slate-200 bg-white px-6 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
           >
             上一题
           </button>
@@ -142,7 +145,7 @@ export default function QuizPage() {
             <button
               onClick={handleSubmit}
               disabled={!currentAnswer}
-              className="order-1 sm:order-2 rounded-full bg-zinc-900 px-8 py-3.5 font-medium text-white transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="order-1 sm:order-2 rounded-xl bg-slate-700 px-8 py-3.5 font-medium text-white transition-all hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
             >
               查看结果
             </button>
@@ -150,7 +153,7 @@ export default function QuizPage() {
             <button
               onClick={handleNext}
               disabled={!currentAnswer}
-              className="order-1 sm:order-2 rounded-full bg-zinc-900 px-8 py-3.5 font-medium text-white transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="order-1 sm:order-2 rounded-xl bg-slate-700 px-8 py-3.5 font-medium text-white transition-all hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
             >
               下一题
             </button>
