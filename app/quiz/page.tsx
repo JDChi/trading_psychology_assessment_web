@@ -20,6 +20,13 @@ export default function QuizPage() {
   const handleSelect = (value: number) => {
     const newAnswers = answers.filter((a) => a.questionId !== currentQuestion.id);
     setAnswers([...newAnswers, { questionId: currentQuestion.id, value }]);
+
+    // 选择后自动跳转到下一题
+    if (currentIndex < questions.length - 1) {
+      setTimeout(() => {
+        setCurrentIndex(currentIndex + 1);
+      }, 300); // 添加小延迟让用户看到选择效果
+    }
   };
 
   const handleNext = () => {
@@ -136,26 +143,17 @@ export default function QuizPage() {
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
-            className="order-2 sm:order-1 rounded-xl border-2 border-slate-200 bg-white px-6 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-xl border-2 border-slate-200 bg-white px-6 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
           >
             上一题
           </button>
 
-          {currentIndex === questions.length - 1 ? (
+          {currentIndex === questions.length - 1 && currentAnswer && (
             <button
               onClick={handleSubmit}
-              disabled={!currentAnswer}
-              className="order-1 sm:order-2 rounded-xl bg-slate-700 px-8 py-3.5 font-medium text-white transition-all hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-xl bg-slate-700 px-8 py-3.5 font-medium text-white transition-all hover:bg-slate-800"
             >
               查看结果
-            </button>
-          ) : (
-            <button
-              onClick={handleNext}
-              disabled={!currentAnswer}
-              className="order-1 sm:order-2 rounded-xl bg-slate-700 px-8 py-3.5 font-medium text-white transition-all hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              下一题
             </button>
           )}
         </div>
