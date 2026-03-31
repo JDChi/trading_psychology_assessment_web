@@ -5,5 +5,8 @@
   "pages_build_output_dir": ".next",
   "dev": {
     "port": 3000
+  },
+  "deploy": {
+    "command": "npx wrangler pages deploy .next"
   }
 }
