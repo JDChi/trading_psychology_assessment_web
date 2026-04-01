@@ -115,17 +115,17 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 px-4 py-8 sm:px-6 sm:py-12">
-      <main className="w-full max-w-xl">
-        {/* 进度区域 */}
-        <div className="mb-8">
-          <div className="mb-3 flex items-center justify-between text-sm">
+    <div className="h-[100dvh] flex flex-col items-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 px-4 pt-4 pb-0 sm:px-6 sm:pt-6 sm:pb-6">
+      <main className="flex w-full max-w-xl flex-1 flex-col overflow-hidden">
+        {/* 进度区域 - 固定在顶部 */}
+        <div className="mb-4 flex-shrink-0">
+          <div className="mb-2 flex items-center justify-between text-xs sm:text-sm">
             <span className="font-medium text-slate-600">
               第 {currentIndex + 1} / {questions.length} 题
             </span>
             <span className="font-medium text-slate-700">{Math.round(progress)}%</span>
           </div>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
+          <div className="h-1 w-full overflow-hidden rounded-full bg-slate-200">
             <div
               className="h-full rounded-full bg-slate-700 transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
@@ -133,29 +133,35 @@ export default function QuizPage() {
           </div>
         </div>
 
-        <QuestionCard
-          question={currentQuestion}
-          selectedValue={currentAnswer?.value ?? null}
-          onSelect={handleSelect}
-        />
+        {/* 问题+选项区域 - 可滚动 */}
+        <div className="flex-1 overflow-y-auto">
+          <QuestionCard
+            question={currentQuestion}
+            selectedValue={currentAnswer?.value ?? null}
+            onSelect={handleSelect}
+          />
+        </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row justify-between gap-3">
-          <button
-            onClick={handlePrev}
-            disabled={currentIndex === 0}
-            className="rounded-xl border-2 border-slate-200 bg-white px-6 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            上一题
-          </button>
-
-          {currentIndex === questions.length - 1 && currentAnswer && (
+        {/* 按钮组 - 固定在底部 */}
+        <div className="sticky bottom-0 bg-gradient-to-t from-slate-50 to-transparent pt-4 pb-3 sm:pb-4">
+          <div className="flex gap-3">
             <button
-              onClick={handleSubmit}
-              className="rounded-xl bg-slate-700 px-8 py-3.5 font-medium text-white transition-all hover:bg-slate-800"
+              onClick={handlePrev}
+              disabled={currentIndex === 0}
+              className="flex-1 rounded-xl border-2 border-slate-200 bg-white px-4 py-3 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none sm:px-6 sm:py-3.5"
             >
-              查看结果
+              上一题
             </button>
-          )}
+
+            {currentIndex === questions.length - 1 && currentAnswer && (
+              <button
+                onClick={handleSubmit}
+                className="flex-1 rounded-xl bg-slate-700 px-6 py-3 font-medium text-white transition-all hover:bg-slate-800 sm:flex-none sm:px-8 sm:py-3.5"
+              >
+                查看结果
+              </button>
+            )}
+          </div>
         </div>
       </main>
     </div>
